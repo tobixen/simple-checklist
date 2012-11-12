@@ -1,7 +1,7 @@
 simple-checklist
 ================
 
-This is intended to become "yet another personal organizer"-kind of tool.  "Todo-lists", "Calendars", "trackers", "checklists" and even email systems are often quite overlapping kind of things and there is constantly a risk of widening the scope too much.  The idea here is to handle checklists of small and trivial occurring tasks (or things) - i.e. shopping lists, vacation packing lists, morning routines, etc.
+This is intended to become "yet another personal organizer"-kind of tool.  "Todo-lists", "Calendars", "trackers", "checklists" and even email systems are often quite overlapping kind of things and there is constantly a risk of widening the scope too much.  The idea here is to handle checklists of small and trivial occurring tasks (or things) that eventually takes time (to find/pack) - i.e. shopping lists, vacation packing lists, morning routines, etc.
 
 Focus:
 * Checking off items on a list should be done with minimal effort.  I want the software to be useful and helpful, and not in the way, it should not feel like "extra beurocraziness".
