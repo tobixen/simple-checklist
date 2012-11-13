@@ -4,8 +4,13 @@ CHKLIST='morgenrutiner'
 MUSICDIR='/home/tobias/s3/music.tobixen/checklists/'
 
 while [ 1 ] ; do
-query="select start_time,checkpoint_who,checkpoint_id,pg_sleep(extract(epoch from start_time-now()::time)) from checkpoint where start_time>now()::time and checklist='$CHKLIST' order by start_time limit 1;"
-data=$(echo $query | ssh srv1.bekkenstenveien53c.oslo.no psql -At checklist_db)
+query="select start_time,checkpoint_who,checkpoint_id,pg_sleep(extract(epoch from start_time-now()::time)) from (select * from checkpoint where start_time>now()::time and checklist='$CHKLIST' order by start_time limit 1) as foo;"
+data=$(echo "$query" | ssh srv1.bekkenstenveien53c.oslo.no psql -At checklist_db)
+if [ -z "$data" ]; then
+    ## check tomorrow instead ...
+    query="select start_time,checkpoint_who,checkpoint_id,pg_sleep(86400+extract(epoch from start_time-now()::time)) from (select * from checkpoint where checklist='$CHKLIST' order by start_time limit 1) as foo;"
+    data=$(echo "$query" | ssh srv1.bekkenstenveien53c.oslo.no psql -At checklist_db)
+fi
 start_time=$(echo "$data" | cut -f1 -d'|')
 who=$(echo "$data" | cut -f2 -d'|')
 what=$(echo "$data" | cut -f3 -d'|')
